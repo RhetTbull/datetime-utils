@@ -1,7 +1,7 @@
-
 """ datetime.datetime helper functions for converting to/from UTC """
 
 import datetime
+
 
 def get_local_tz(dt):
     """ Return local timezone as datetime.timezone tzinfo for dt
@@ -96,7 +96,6 @@ def datetime_naive_to_utc(dt):
         TypeError if dt is not a datetime.datetime object
         ValueError if dt is not a naive/timezone unaware object
     """
-
 
     if type(dt) != datetime.datetime:
         raise TypeError(f"dt must be type datetime.datetime, not {type(dt)}")
