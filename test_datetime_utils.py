@@ -91,3 +91,17 @@ def test_datetime_utc_to_local():
     utc = datetime.datetime(2020, 9, 1, 19, 0, 0, tzinfo=datetime.timezone.utc)
     dt = datetime_utils.datetime_utc_to_local(utc)
     assert dt == datetime.datetime(2020, 9, 1, 12, 0, 0, tzinfo=tz)
+
+
+def test_datetime_utc_to_local_2():
+    import datetime
+    import os
+
+    import datetime_utils
+
+    os.environ["TZ"] = "CEST"
+
+    tz = datetime.timezone(offset=datetime.timedelta(seconds=7200))
+    utc = datetime.datetime(2020, 9, 1, 19, 0, 0, tzinfo=datetime.timezone.utc)
+    dt = datetime_utils.datetime_utc_to_local(utc)
+    assert dt == datetime.datetime(2020, 9, 1, 21, 0, 0, tzinfo=tz)

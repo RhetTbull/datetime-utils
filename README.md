@@ -1,7 +1,7 @@
 # datetime_utils
 
 ## What is datetime_utils
-A handful of small utility methods I find useful for dealing with [datetime.datetime](https://docs.python.org/3/library/datetime.html#module-datetime) objects and timezones.
+A handful of small utility methods I find useful for dealing with [datetime.datetime](https://docs.python.org/3/library/datetime.html#module-datetime) objects and timezones.  Some of these are really just one-liners but they're easy to get wrong so I find it useful to package them into a tested module. 
 
 ## Installation
 
@@ -38,3 +38,10 @@ datetime.datetime(2019, 12, 1, 0, 0, tzinfo=datetime.timezone.utc)
 datetime.datetime(2019, 11, 30, 16, 0, tzinfo=datetime.timezone(datetime.timedelta(days=-1, seconds=57600), 'PST'))
 >>> 
 ```
+
+## Testing
+
+100% test coverage with `pytest`:
+
+- `pip install pytest`
+- `python -m pytest`
