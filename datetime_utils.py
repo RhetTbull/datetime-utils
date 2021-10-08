@@ -176,6 +176,7 @@ def datetime_to_new_tz(dt: datetime.datetime, offset):
     tz = datetime.timezone(time_delta)
     return dt.astimezone(tz=tz)
 
+
 def utc_offset_seconds(dt: datetime.datetime) -> int:
     """Return offset in seconds from UTC for timezone aware datetime.datetime object
 
