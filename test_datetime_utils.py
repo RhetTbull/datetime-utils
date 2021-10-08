@@ -122,3 +122,16 @@ def test_datetime_to_new_tz():
     dt_new = datetime_utils.datetime_to_new_tz(dt, 3600)
     tz_new = datetime.timezone(offset=datetime.timedelta(seconds=3600))
     assert dt_new == datetime.datetime(2021, 10, 1, 8, 30, 0, tzinfo=tz_new)
+
+
+def test_utc_offset_seconds():
+    import datetime
+    from datetime_utils import utc_offset_seconds
+
+    dt_utc = datetime.datetime(2021, 9, 1, 0, 0, 0, 0, tzinfo=datetime.timezone.utc)
+    assert utc_offset_seconds(dt_utc) == 0
+
+    dt_pdt = datetime.datetime(
+        2021, 9, 1, 0, 0, 0, 0, tzinfo=datetime.timezone(datetime.timedelta(hours=-7))
+    )
+    assert utc_offset_seconds(dt_pdt) == -25200
