@@ -1,6 +1,8 @@
 """ datetime.datetime helper functions for converting to/from UTC and other datetime manipulations"""
 
-__version__ = "2021.10.8"
+# source: https://github.com/RhetTbull/datetime-utils
+
+__version__ = "2021.10.9"
 
 import datetime
 
@@ -167,7 +169,7 @@ def datetime_utc_to_local(dt: datetime.datetime) -> datetime.datetime:
     return dt.replace(tzinfo=datetime.timezone.utc).astimezone(tz=None)
 
 
-def datetime_to_new_tz(dt: datetime.datetime, offset):
+def datetime_to_new_tz(dt: datetime.datetime, offset) -> datetime.datetime:
     """Convert datetime.datetime object from current timezone to new timezone with offset of seconds from UTC"""
     if not datetime_has_tz(dt):
         raise ValueError("dt must be timezone aware")
