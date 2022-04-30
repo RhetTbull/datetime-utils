@@ -2,13 +2,24 @@
 
 # source: https://github.com/RhetTbull/datetime-utils
 
-__version__ = "2021.10.9"
+__version__ = "2022.04.30"
 
 import datetime
 
 # TODO: probably shouldn't use replace here, see this:
 # https://stackoverflow.com/questions/13994594/how-to-add-timezone-into-a-naive-datetime-instance-in-python/13994611#13994611
 
+__all__ = [
+    "datetime_has_tz",
+    "datetime_naive_to_local",
+    "datetime_naive_to_utc",
+    "datetime_remove_tz",
+    "datetime_to_new_tz",
+    "datetime_tz_to_utc",
+    "datetime_utc_to_local",
+    "get_local_tz",
+    "utc_offset_seconds",
+]
 
 # TODO: look at https://github.com/regebro/tzlocal for more robust implementation
 def get_local_tz(dt: datetime.datetime) -> datetime.tzinfo:
