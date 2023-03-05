@@ -7,7 +7,7 @@ import pytest
 import datetime_utils
 
 
-def test_get_local_tz():
+def test_datetime_local_tz():
     os.environ["TZ"] = "US/Pacific"
 
     dt = datetime.datetime(2020, 9, 1, 21, 10, 00)
