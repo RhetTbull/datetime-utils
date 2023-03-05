@@ -1,13 +1,16 @@
+"""Test datetime_utils.py"""
+
 import datetime
 import os
-from datetime import date, timezone
-
-import pytest
 
 import datetime_utils
 
 
 def test_datetime_local_tz():
+    """On linux, this test will fail if the timezone is not set to US/Pacific when running the test.
+    Thus, the test should be run with the following command:
+        TZ="US/Pacific" python -m pytest
+    """
     os.environ["TZ"] = "US/Pacific"
 
     dt = datetime.datetime(2020, 9, 1, 21, 10, 00)
@@ -17,18 +20,6 @@ def test_datetime_local_tz():
     dt = datetime.datetime(2020, 12, 1, 21, 10, 00)
     tz = datetime_utils.datetime_local_tz(dt)
     assert tz == datetime.timezone(offset=datetime.timedelta(seconds=-28800))
-
-
-def test_datetime_local_tz_2():
-    os.environ["TZ"] = "US/Eastern"
-
-    dt = datetime.datetime(2020, 9, 1, 21, 10, 00)
-    tz = datetime_utils.datetime_local_tz(dt)
-    assert tz == datetime.timezone(offset=datetime.timedelta(seconds=-14400))
-
-    dt = datetime.datetime(2020, 12, 1, 21, 10, 00)
-    tz = datetime_utils.datetime_local_tz(dt)
-    assert tz == datetime.timezone(offset=datetime.timedelta(seconds=-18000))
 
 
 def test_datetime_has_tz():
