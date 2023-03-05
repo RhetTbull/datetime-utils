@@ -2,7 +2,7 @@
 
 # source: https://github.com/RhetTbull/datetime-utils
 
-__version__ = "2022.04.30"
+__version__ = "2023.03.05"
 
 import datetime
 
@@ -17,27 +17,23 @@ __all__ = [
     "datetime_to_new_tz",
     "datetime_tz_to_utc",
     "datetime_utc_to_local",
-    "get_local_tz",
+    "datetime_local_tz",
     "utc_offset_seconds",
 ]
 
-# TODO: look at https://github.com/regebro/tzlocal for more robust implementation
-def get_local_tz(dt: datetime.datetime) -> datetime.tzinfo:
-    """Return local timezone as datetime.timezone tzinfo for dt
+
+def datetime_local_tz(dt: datetime.datetime) -> datetime.tzinfo:
+    """Return local timezone as datetime.timezone tzinfo for naive datetime dt
 
     Args:
-        dt: datetime.datetime
+        dt: datetime.datetime object
 
     Returns:
         local timezone for dt as datetime.timezone
-
-    Raises:
-        ValueError if dt is not timezone naive
     """
-    if not datetime_has_tz(dt):
-        return dt.astimezone().tzinfo
-    else:
+    if datetime_has_tz(dt):
         raise ValueError("dt must be naive datetime.datetime object")
+    return dt.astimezone().tzinfo
 
 
 def datetime_has_tz(dt: datetime.datetime) -> bool:
@@ -154,7 +150,7 @@ def datetime_naive_to_local(dt: datetime.datetime) -> datetime.datetime:
             f"{dt} has tzinfo {dt.tzinfo} and offset {dt.tzinfo.utcoffset(dt)}"
         )
 
-    return dt.replace(tzinfo=get_local_tz(dt))
+    return dt.replace(tzinfo=datetime_local_tz(dt))
 
 
 def datetime_utc_to_local(dt: datetime.datetime) -> datetime.datetime:
