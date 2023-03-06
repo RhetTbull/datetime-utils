@@ -6,9 +6,6 @@ __version__ = "2023.03.05"
 
 import datetime
 
-# TODO: probably shouldn't use replace here, see this:
-# https://stackoverflow.com/questions/13994594/how-to-add-timezone-into-a-naive-datetime-instance-in-python/13994611#13994611
-
 __all__ = [
     "datetime_has_tz",
     "datetime_naive_to_local",
@@ -66,14 +63,14 @@ def datetime_tz_to_utc(dt: datetime.datetime) -> datetime.datetime:
 
     Raises:
         TypeError if dt is not datetime.datetime object
-        ValueError if dt does not have timeone information
+        ValueError if dt does not have timezone information
     """
 
     if type(dt) != datetime.datetime:
         raise TypeError(f"dt must be type datetime.datetime, not {type(dt)}")
 
     if dt.tzinfo is not None and dt.tzinfo.utcoffset(dt) is not None:
-        return dt.replace(tzinfo=dt.tzinfo).astimezone(tz=datetime.timezone.utc)
+        return dt.astimezone(tz=datetime.timezone.utc)
     else:
         raise ValueError("dt does not have timezone info")
 
@@ -173,7 +170,7 @@ def datetime_utc_to_local(dt: datetime.datetime) -> datetime.datetime:
     if dt.tzinfo is not datetime.timezone.utc:
         raise ValueError(f"{dt} must be in UTC timezone: timezone = {dt.tzinfo}")
 
-    return dt.replace(tzinfo=datetime.timezone.utc).astimezone(tz=None)
+    return dt.astimezone(tz=None)
 
 
 def datetime_to_new_tz(dt: datetime.datetime, offset) -> datetime.datetime:

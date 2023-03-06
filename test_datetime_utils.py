@@ -2,6 +2,7 @@
 
 import datetime
 
+import pytz
 import tzlocal
 
 import datetime_utils
@@ -31,10 +32,17 @@ def test_datetime_has_tz():
 
 
 def test_datetime_tz_to_utc():
-    tz = datetime.timezone(offset=datetime.timedelta(seconds=-25200))
-    dt = datetime.datetime(2020, 9, 1, 22, 6, 0, tzinfo=tz)
+    tz = pytz.timezone("US/Pacific")
+    dt = tz.localize(datetime.datetime(2020, 12, 1, 22, 6, 0))
     utc = datetime_utils.datetime_tz_to_utc(dt)
-    assert utc == datetime.datetime(2020, 9, 2, 5, 6, 0, tzinfo=datetime.timezone.utc)
+    assert utc == datetime.datetime(2020, 12, 2, 6, 6, 0, tzinfo=datetime.timezone.utc)
+
+
+def test_datetime_tz_to_utc_dst():
+    tz = pytz.timezone("US/Pacific")
+    dt = tz.localize(datetime.datetime(2020, 5, 1, 22, 6, 0))
+    utc = datetime_utils.datetime_tz_to_utc(dt)
+    assert utc == datetime.datetime(2020, 5, 2, 5, 6, 0, tzinfo=datetime.timezone.utc)
 
 
 def test_datetime_remove_tz():
