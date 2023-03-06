@@ -27,6 +27,8 @@ def test_datetime_has_tz():
     dt = datetime.datetime(2020, 9, 1, 21, 10, 00, tzinfo=tz)
     assert datetime_utils.datetime_has_tz(dt)
 
+
+def test_not_datetime_has_tz():
     dt = datetime.datetime(2020, 9, 1, 21, 10, 00)
     assert not datetime_utils.datetime_has_tz(dt)
 
