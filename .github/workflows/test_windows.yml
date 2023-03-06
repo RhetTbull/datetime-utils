@@ -30,9 +30,7 @@ jobs:
         python -m pip install pytest
         # if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
     - name: Set Timezone
-      uses: szenius/set-timezone@v1.1
-      with:
-        timezoneWindows: "Pacific Standard Time"
+      run: tzutil /s "Pacific Standard Time"
     - name: Test with pytest
       run: |
         pytest
