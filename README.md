@@ -6,15 +6,15 @@ A handful of small utility methods I find useful for dealing with [datetime.date
 
 Includes:
 
-- datetime_has_tz()
-- datetime_naive_to_local()
-- datetime_naive_to_utc()
-- datetime_remove_tz()
-- datetime_to_new_tz()
-- datetime_tz_to_utc()
-- datetime_utc_to_local()
-- get_local_tz()
-- utc_offset_seconds()
+- `datetime_has_tz(dt: datetime.datetime) -> bool`: returns True if the datetime has a timezone
+- `datetime_naive_to_local(dt: datetime.datetime) -> datetime.datetime`: converts a naive datetime to the local timezone
+- `datetime_naive_to_utc(dt: datetime.datetime) -> datetime.datetime`: converts a naive datetime to UTC
+- `datetime_remove_tz(dt: datetime.datetime) -> datetime.datetime:`: removes the timezone from a datetime
+- `datetime_to_new_tz(dt: datetime.datetime, offset) -> datetime.datetime`: converts a datetime to a new timezone
+- `datetime_tz_to_utc(dt: datetime.datetime) -> datetime.datetime`: converts a datetime with a timezone to UTC
+- `datetime_utc_to_local(dt: datetime.datetime) -> datetime.datetime`: converts a UTC datetime to the local timezone
+- `get_local_tz(dt: datetime.datetime) -> datetime.tzinfo`: returns the local timezone for a given datetime
+- `utc_offset_seconds(dt: datetime.datetime) -> int`: returns the UTC offset in seconds for a given datetime
 
 ## Installation
 
@@ -57,4 +57,12 @@ datetime.datetime(2019, 11, 30, 16, 0, tzinfo=datetime.timezone(datetime.timedel
 100% test coverage with `pytest`:
 
 - `pip install -r requirements_dev.txt`
-- `python -m pytest`
+- `python -m pytest --cov=datetime_tzutils --cov-report=term-missing`
+
+## Contributing
+
+Contributions are welcome. Please open an issue or submit a pull request.
+
+The tests are written with pytest and require a couple of extra packages. Install them with:
+
+`pip install -r requirements_dev.txt`

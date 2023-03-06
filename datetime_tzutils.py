@@ -25,7 +25,14 @@ def get_local_tz(dt: datetime.datetime) -> datetime.tzinfo:
 
     Returns:
         local timezone for dt as datetime.timezone
+
+    Raises:
+        TypeError if dt is not datetime.datetime object
     """
+
+    if not isinstance(dt, datetime.datetime):
+        raise TypeError(f"dt must be type datetime.datetime, not {type(dt)}")
+
     if datetime_has_tz(dt):
         raise ValueError("dt must be naive datetime.datetime object")
     return dt.astimezone().tzinfo
@@ -44,7 +51,7 @@ def datetime_has_tz(dt: datetime.datetime) -> bool:
         TypeError if dt is not a datetime.datetime object
     """
 
-    if type(dt) != datetime.datetime:
+    if not isinstance(dt, datetime.datetime):
         raise TypeError(f"dt must be type datetime.datetime, not {type(dt)}")
 
     return dt.tzinfo is not None and dt.tzinfo.utcoffset(dt) is not None
@@ -64,7 +71,7 @@ def datetime_tz_to_utc(dt: datetime.datetime) -> datetime.datetime:
         ValueError if dt does not have timezone information
     """
 
-    if type(dt) != datetime.datetime:
+    if not isinstance(dt, datetime.datetime):
         raise TypeError(f"dt must be type datetime.datetime, not {type(dt)}")
 
     if dt.tzinfo is not None and dt.tzinfo.utcoffset(dt) is not None:
@@ -86,7 +93,7 @@ def datetime_remove_tz(dt: datetime.datetime) -> datetime.datetime:
         TypeError if dt is not a datetime.datetime object
     """
 
-    if type(dt) != datetime.datetime:
+    if not isinstance(dt, datetime.datetime):
         raise TypeError(f"dt must be type datetime.datetime, not {type(dt)}")
 
     return dt.replace(tzinfo=None)
@@ -107,7 +114,7 @@ def datetime_naive_to_utc(dt: datetime.datetime) -> datetime.datetime:
         ValueError if dt is not a naive/timezone unaware object
     """
 
-    if type(dt) != datetime.datetime:
+    if not isinstance(dt, datetime.datetime):
         raise TypeError(f"dt must be type datetime.datetime, not {type(dt)}")
 
     if dt.tzinfo is not None and dt.tzinfo.utcoffset(dt) is not None:
@@ -135,7 +142,7 @@ def datetime_naive_to_local(dt: datetime.datetime) -> datetime.datetime:
         ValueError if dt is not a naive/timezone unaware object
     """
 
-    if type(dt) != datetime.datetime:
+    if not isinstance(dt, datetime.datetime):
         raise TypeError(f"dt must be type datetime.datetime, not {type(dt)}")
 
     if dt.tzinfo is not None and dt.tzinfo.utcoffset(dt) is not None:
@@ -162,7 +169,7 @@ def datetime_utc_to_local(dt: datetime.datetime) -> datetime.datetime:
         ValueError if dt is not in UTC timezone
     """
 
-    if type(dt) != datetime.datetime:
+    if not isinstance(dt, datetime.datetime):
         raise TypeError(f"dt must be type datetime.datetime, not {type(dt)}")
 
     if dt.tzinfo is not datetime.timezone.utc:
@@ -172,7 +179,22 @@ def datetime_utc_to_local(dt: datetime.datetime) -> datetime.datetime:
 
 
 def datetime_to_new_tz(dt: datetime.datetime, offset) -> datetime.datetime:
-    """Convert datetime.datetime object from current timezone to new timezone with offset of seconds from UTC"""
+    """Convert datetime.datetime object from current timezone to new timezone with offset of seconds from UTC
+
+    Args:
+        dt: datetime.datetime object
+
+    Returns:
+        datetime.datetime object in new timezone
+
+    Raises:
+        TypeError if dt is not a datetime.datetime object
+        ValueError if dt is not timezone aware
+    """
+
+    if not isinstance(dt, datetime.datetime):
+        raise TypeError(f"dt must be type datetime.datetime, not {type(dt)}")
+
     if not datetime_has_tz(dt):
         raise ValueError("dt must be timezone aware")
 
@@ -192,7 +214,11 @@ def utc_offset_seconds(dt: datetime.datetime) -> int:
 
     Raises:
         ValueError if dt does not have timezone information
+        TypeError if dt is not a datetime.datetime object
     """
+
+    if not isinstance(dt, datetime.datetime):
+        raise TypeError(f"dt must be type datetime.datetime, not {type(dt)}")
 
     if dt.tzinfo is not None and dt.tzinfo.utcoffset(dt) is not None:
         return dt.tzinfo.utcoffset(dt).total_seconds()
