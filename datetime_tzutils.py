@@ -1,8 +1,6 @@
 """ datetime.datetime helper functions for converting to/from UTC and other datetime manipulations"""
 
-# source: https://github.com/RhetTbull/datetime-utils
-
-__version__ = "2023.03.05"
+__version__ = "1.0.0"
 
 import datetime
 
