@@ -14,12 +14,12 @@ __all__ = [
     "datetime_to_new_tz",
     "datetime_tz_to_utc",
     "datetime_utc_to_local",
-    "datetime_local_tz",
+    "get_local_tz",
     "utc_offset_seconds",
 ]
 
 
-def datetime_local_tz(dt: datetime.datetime) -> datetime.tzinfo:
+def get_local_tz(dt: datetime.datetime) -> datetime.tzinfo:
     """Return local timezone as datetime.timezone tzinfo for naive datetime dt
 
     Args:
@@ -147,7 +147,7 @@ def datetime_naive_to_local(dt: datetime.datetime) -> datetime.datetime:
             f"{dt} has tzinfo {dt.tzinfo} and offset {dt.tzinfo.utcoffset(dt)}"
         )
 
-    return dt.replace(tzinfo=datetime_local_tz(dt))
+    return dt.replace(tzinfo=get_local_tz(dt))
 
 
 def datetime_utc_to_local(dt: datetime.datetime) -> datetime.datetime:

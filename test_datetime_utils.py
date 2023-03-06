@@ -8,16 +8,16 @@ import tzlocal
 import datetime_utils
 
 
-def test_datetime_local_tz():
+def test_get_local_tz_dst():
     dt = datetime.datetime(2020, 9, 1, 21, 10, 00)
-    tz = datetime_utils.datetime_local_tz(dt)
+    tz = datetime_utils.get_local_tz(dt)
     tz_offset = tzlocal.get_localzone().utcoffset(dt)
     assert tz == datetime.timezone(offset=tz_offset)
 
 
-def test_datetime_local_tz_dst():
+def test_get_local_tz():
     dt = datetime.datetime(2020, 12, 1, 21, 10, 00)
-    tz = datetime_utils.datetime_local_tz(dt)
+    tz = datetime_utils.get_local_tz(dt)
     tz_offset = tzlocal.get_localzone().utcoffset(dt)
     assert tz == datetime.timezone(offset=tz_offset)
 
