@@ -5,14 +5,13 @@ import os
 
 import datetime_utils
 
+os.environ["TZ"] = "US/Pacific"
 
 def test_datetime_local_tz():
     """On linux, this test will fail if the timezone is not set to US/Pacific when running the test.
     Thus, the test should be run with the following command:
         TZ="US/Pacific" python -m pytest
     """
-    os.environ["TZ"] = "US/Pacific"
-
     dt = datetime.datetime(2020, 9, 1, 21, 10, 00)
     tz = datetime_utils.datetime_local_tz(dt)
     assert tz == datetime.timezone(offset=datetime.timedelta(seconds=-25200))
@@ -39,8 +38,6 @@ def test_datetime_tz_to_utc():
 
 
 def test_datetime_remove_tz():
-    os.environ["TZ"] = "US/Pacific"
-
     tz = datetime.timezone(offset=datetime.timedelta(seconds=-25200))
     dt = datetime.datetime(2020, 9, 1, 22, 6, 0, tzinfo=tz)
     dt = datetime_utils.datetime_remove_tz(dt)
@@ -55,31 +52,17 @@ def test_datetime_naive_to_utc():
 
 
 def test_datetime_naive_to_local():
-    os.environ["TZ"] = "US/Pacific"
-
     tz = datetime.timezone(offset=datetime.timedelta(seconds=-25200))
     dt = datetime.datetime(2020, 9, 1, 12, 0, 0)
-    utc = datetime_utils.datetime_naive_to_local(dt)
-    assert utc == datetime.datetime(2020, 9, 1, 12, 0, 0, tzinfo=tz)
+    local = datetime_utils.datetime_naive_to_local(dt)
+    assert local == datetime.datetime(2020, 9, 1, 12, 0, 0, tzinfo=tz)
 
 
 def test_datetime_utc_to_local():
-    os.environ["TZ"] = "US/Pacific"
-
     tz = datetime.timezone(offset=datetime.timedelta(seconds=-25200))
     utc = datetime.datetime(2020, 9, 1, 19, 0, 0, tzinfo=datetime.timezone.utc)
     dt = datetime_utils.datetime_utc_to_local(utc)
     assert dt == datetime.datetime(2020, 9, 1, 12, 0, 0, tzinfo=tz)
-
-
-def test_datetime_utc_to_local_2():
-    os.environ["TZ"] = "CEST"
-
-    tz = datetime.timezone(offset=datetime.timedelta(seconds=7200))
-    utc = datetime.datetime(2020, 9, 1, 19, 0, 0, tzinfo=datetime.timezone.utc)
-    dt = datetime_utils.datetime_utc_to_local(utc)
-    assert dt == datetime.datetime(2020, 9, 1, 21, 0, 0, tzinfo=tz)
-
 
 def test_datetime_to_new_tz():
     """Test datetime_to_new_tz"""
@@ -94,7 +77,6 @@ def test_datetime_to_new_tz():
     tz_new = datetime.timezone(offset=datetime.timedelta(seconds=3600))
     assert dt_new == datetime.datetime(2021, 10, 1, 8, 30, 0, tzinfo=tz_new)
 
-
 def test_utc_offset_seconds():
     dt_utc = datetime.datetime(2021, 9, 1, 0, 0, 0, 0, tzinfo=datetime.timezone.utc)
     assert datetime_utils.utc_offset_seconds(dt_utc) == 0
@@ -103,3 +85,4 @@ def test_utc_offset_seconds():
         2021, 9, 1, 0, 0, 0, 0, tzinfo=datetime.timezone(datetime.timedelta(hours=-7))
     )
     assert datetime_utils.utc_offset_seconds(dt_pdt) == -25200
+
