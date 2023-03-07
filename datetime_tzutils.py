@@ -1,6 +1,6 @@
 """ datetime.datetime helper functions for converting to/from UTC and other datetime manipulations"""
 
-__version__ = "1.0.0"
+__version__ = "1.0.1"
 
 import datetime
 

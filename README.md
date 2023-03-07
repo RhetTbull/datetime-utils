@@ -1,6 +1,6 @@
-# datetime-tzutils
+# datetime_tzutils
 
-## What is datetime-tzutils
+## What is datetime_tzutils
 
 A handful of small utility methods I find useful for dealing with
 [datetime.datetime](https://docs.python.org/3/library/datetime.html#module-datetime)
@@ -8,7 +8,7 @@ objects and timezones. Some of these are just a couple of lines but they're easy
 get wrong so I find it useful to package them into a tested module. I also find it
 makes code more readable and less repetitive.
 
-datetime-tzutils is a pure Python module with no dependencies.
+datetime_tzutils is a pure Python module with no dependencies.
 
 Includes:
 
@@ -24,7 +24,7 @@ Includes:
 
 ## Installation
 
-`pip install datetime-tzutils`
+`pip install datetime_tzutils`
 
 ## Synopsis
 
@@ -62,7 +62,7 @@ The source code is available on [GitHub](https://github.com/RhetTbull/datetime-u
 
 ## Testing
 
-datetime-tzutils has been tested with Python 3.9, 3.10, and 3.11 on Linux, macOS, and Windows.
+datetime_tzutils has been tested with Python 3.9, 3.10, and 3.11 on Linux, macOS, and Windows.
 
 100% test coverage with `pytest`:
 
