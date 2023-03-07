@@ -1,8 +1,12 @@
-# datetime_tzutils
+# datetime-tzutils
 
-## What is datetime_tzutils
+## What is datetime-tzutils
 
-A handful of small utility methods I find useful for dealing with [datetime.datetime](https://docs.python.org/3/library/datetime.html#module-datetime) objects and timezones. Some of these are really just one-liners but they're easy to get wrong so I find it useful to package them into a tested module.
+A handful of small utility methods I find useful for dealing with
+[datetime.datetime](https://docs.python.org/3/library/datetime.html#module-datetime)
+objects and timezones. Some of these are just a couple of lines but they're easy to
+get wrong so I find it useful to package them into a tested module. I also find it
+makes code more readable and less repetitive.
 
 Includes:
 
@@ -18,9 +22,7 @@ Includes:
 
 ## Installation
 
-Just copy datetime_tzutils.py to your source tree then
-
-`import datetime_tzutils`
+`pip install datetime-tzutils`
 
 ## Synopsis
 
@@ -52,7 +54,13 @@ datetime.datetime(2019, 11, 30, 16, 0, tzinfo=datetime.timezone(datetime.timedel
 >>> 
 ```
 
+## Source Code
+
+The source code is available on [GitHub](https://github.com/RhetTbull/datetime-utils)
+
 ## Testing
+
+datetime-tzutils has been tested with Python 3.9, 3.10, and 3.11 on Linux, macOS, and Windows.
 
 100% test coverage with `pytest`:
 
@@ -66,3 +74,7 @@ Contributions are welcome. Please open an issue or submit a pull request.
 The tests are written with pytest and require a couple of extra packages. Install them with:
 
 `pip install -r requirements_dev.txt`
+
+## License
+
+MIT License
