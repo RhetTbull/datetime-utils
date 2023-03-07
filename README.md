@@ -8,6 +8,8 @@ objects and timezones. Some of these are just a couple of lines but they're easy
 get wrong so I find it useful to package them into a tested module. I also find it
 makes code more readable and less repetitive.
 
+datetime-tzutils is a pure Python module with no dependencies.
+
 Includes:
 
 - `datetime_has_tz(dt: datetime.datetime) -> bool`: returns True if the datetime has a timezone
